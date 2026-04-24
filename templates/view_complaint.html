@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang=“en”>
+<head>
+    <meta charset=“UTF-8”>
+    <title>View Complaints</title>
+    <style>
+    body {
+        background-color: #f0f4f8;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    h2 { color: #1a73e8; text-align: center; padding: 30px 0 20px; }
+    table {
+        width: 85%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        table-layout: auto;
+    }
+    thead { background-color: #1a73e8; color: white; }
+    th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border: 1px solid #e0e0e0;
+    }
+    tbody tr:hover { background-color: #f0f4f8; }
+    a { color: #1a73e8; text-decoration: none; font-weight: 600; margin-right: 8px; }
+    a:hover { text-decoration: underline; }
+</style>
+
+</head>
+<body>
+    <nav style="background:#1a73e8; padding:12px 30px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="color:white; font-size:18px; font-weight:600;">Lost & Found | Admin</span>
+        <div>
+            <a href="/adminhome/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
+            <a href="/logout/" style="color:white; text-decoration:none;">Logout</a>
+        </div>
+    </nav>
+
+    <h2>View Complaints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>Reply</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.userid.username }}</td>
+                <td>{{ i.complaint }}</td>
+                <td>{{ i.date }}</td>
+                <td><a href="/reply/{{ i.id }}/">Reply</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

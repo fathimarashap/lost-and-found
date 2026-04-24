@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 400px;
+            margin: 40px auto;
+        }
+        h2 { color: #1a73e8; text-align: center; margin-bottom: 20px; }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        input[type="file"] {
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Register</h2>
+        <form method="post" action="/register/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>Place</label>
+            <input type="text" name="place">
+            <label>Pin</label>
+            <input type="text" name="pin">
+            <label>Image</label>
+            <input type="file" name="image" accept="image/*">
+            <label>Phone</label>
+            <input type="number" name="phone">
+            <label>Email</label>
+            <input type="email" name="email">
+            <label>Username</label>
+            <input type="text" name="username">
+            <label>Password</label>
+            <input type="password" name="password">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
