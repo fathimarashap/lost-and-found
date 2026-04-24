@@ -58,6 +58,3 @@ pip install -r requirements.txt
 
 ### Profile Page
 ![Profile](screenshots/profile.png)
-
-### Lost Items Page
-![Lost Items](screenshots/lost-items.png)
