@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS=[str(BASE_DIR /'static')]
 MEDIA_ROOT=str(BASE_DIR /'media')
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-0713.up.railway.app']
