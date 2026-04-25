@@ -186,8 +186,6 @@ def sendcomplaint(request):
     return render(request, 'send_complain.html')
 
 def register(request):
-    if not is_logged_in(request):
-        return redirect("login")
     if request.method == "POST":
         name = request.POST["name"]
         place = request.POST["place"]
