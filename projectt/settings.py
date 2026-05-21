@@ -69,6 +69,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-0713.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-6fa33.up.railway.app']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
