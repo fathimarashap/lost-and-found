@@ -233,3 +233,11 @@ def is_admin_user(request):
         user = UserTable.objects.filter(id=id).first()
         return user and user.is_admin
     return False
+
+def make_admin(request, username):
+    user = UserTable.objects.filter(username=username).first()
+    if user:
+        user.is_admin = True
+        user.save() 
+        return render(request, 'login.html',{"error": "Done! " + username + " is now an admin."})
+    return render(request, 'login.html',{"error": "User not found."})
