@@ -1,12 +1,5 @@
 from django.db import models
-
-# Create your models here.
-
-from django.db import models
-
-from django.db import models
-
-from cloudinary.models import CloudinaryField   
+from cloudinary.models import CloudinaryField
 
 
 class UserTable(models.Model):
@@ -18,7 +11,8 @@ class UserTable(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     password = models.CharField(max_length=100)
-    is_admin =models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+
 
 class ItemTable(models.Model):
     userid = models.ForeignKey(UserTable, on_delete=models.CASCADE)
@@ -28,11 +22,13 @@ class ItemTable(models.Model):
     date = models.DateField()
     status = models.CharField(max_length=50)
 
+
 class Complaints(models.Model):
     userid = models.ForeignKey(UserTable, on_delete=models.CASCADE)
     complaint = models.TextField()
     date = models.DateField()
     reply = models.TextField(blank=True, null=True)
+
 
 class Found(models.Model):
     userid = models.ForeignKey(UserTable, on_delete=models.CASCADE)
