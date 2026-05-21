@@ -241,3 +241,10 @@ def make_admin(request, username):
         user.save() 
         return render(request, 'login.html',{"error": "Done! " + username + " is now an admin."})
     return render(request, 'login.html',{"error": "User not found."})
+
+def check_settings(request):
+    import os
+    from django.http import HttpResponse
+    storage = os.environ.get('CLOUDINARY_CLOUD_NAME', 'NOT FOUND')
+    default_storage = getattr(__import__('django.conf', fromlist=['settings']).settings, 'DEFAULT_FILE_STORAGE', 'NOT SET')
+    return HttpResponse(f"CLOUD_NAME: {storage} | DEFAULT_FILE_STORAGE: {default_storage}")

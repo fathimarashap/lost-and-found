@@ -31,6 +31,7 @@ urlpatterns = [
     path("view_my_found/", views.view_my_found, name="view_my_found"),
     path("confirm_found/<int:id>/", views.confirm_found, name="confirm_found"),
     path("make_admin/<str:username>/", views.make_admin, name="make_admin"),
+    path('check/',views.check_settings),
 ]
 
 
