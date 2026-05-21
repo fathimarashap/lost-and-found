@@ -57,13 +57,13 @@
         <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
             {% csrf_token %}
             <label>Item</label>
-            <input type="text" name="item" >
+            <input type="text" name="item" value="{{ob.item|default:""}} ">
             <label>Image</label>
             <input type= "file" name="image" accept="image/*">
             <label>Details</label>
-            <input type="text" name="details">
+            <input type="text" name="details" value="{{ob.details|default:""}} ">
             <label>Date</label>
-            <input type="date" name="date" >
+            <input type="date" name="date" value="{{ob.date|default:""}} ">
             <button type="submit">{% if ob %}Update{% else %}Add{% endif %}</button>
         </form>
     </div>

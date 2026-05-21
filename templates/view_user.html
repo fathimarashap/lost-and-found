@@ -56,7 +56,7 @@
                 <td>{{ i.name }}</td>
                 <td>{{ i.place }}</td>
                 <td>{{ i.pin }}</td>
-                <td><img src="{{ i.image.url }}" height="90" width="90" alt="" ></td>
+                <td>{% if i.image %}<img src="{{ i.image.url }}" height="90" width="90" alt="" >{% else %}No image{% endif %}</td>
                 <td>{{ i.phone }}</td>
                 <td>{{ i.email }}</td>
             </tr>

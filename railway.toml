@@ -2,4 +2,4 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python manage.py runserver 0.0.0.0:$PORT"
+startCommand = "python manage.py migrate && gunicorn projectt.wsgi --bind 0.0.0.0:$PORT"

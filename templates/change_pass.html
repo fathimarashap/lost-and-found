@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang=“en”>
+<html lang="en">
 <head>
-    <meta charset=“UTF-8”>
+    <meta charset="UTF-8">
     <title>Change Password</title>
     <style>
     body {
         background-color: #f0f4f8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
         font-family: 'Segoe UI', sans-serif;
+        margin: 0;
     }
     .form-box {
         background: white;
@@ -18,6 +15,7 @@
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         width: 400px;
+        margin: 40px auto;
     }
     h2 { color: #1a73e8; text-align: center; margin-bottom: 20px; }
     label {
@@ -33,6 +31,7 @@
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 6px;
+        box-sizing: border-box;
     }
     button {
         width: 100%;
@@ -43,8 +42,7 @@
         border-radius: 6px;
         cursor: pointer;
     }
-</style>
-
+    </style>
 </head>
 <body>
     <nav style="background:#1a73e8; padding:12px 30px; display:flex; justify-content:space-between; align-items:center;">
@@ -66,7 +64,7 @@
             <input type="password" name="confirm_password">
             <button type="submit">Change</button>
         </form>
-        <p style="color: red"; text-align: center;>{{ error }}</p>
+        <p style="color: red; text-align: center;">{{ error }}</p>
     </div>
 </body>
 </html>
