@@ -9,7 +9,6 @@ def userlogin(request):
         password = request.POST["password"]
         user = UserTable.objects.filter(username=username).first()
         if user and check_password(password, user.password):
-            user = None
             request.session["user_id"] = user.id
             if user.is_admin:
                 return redirect("adminhome")
@@ -18,6 +17,7 @@ def userlogin(request):
         else:
             return render(request, "login.html", {"error": "Invalid username or password"})
     return render(request, "login.html")
+
 
 
 def adminhome(request):
@@ -100,6 +100,8 @@ def changepass(request):
         confirm = request.POST["confirm_password"]
         if check_password(current, ob.password):
             if new == confirm:
+                if not new or len(new) < 6:
+                    return render(request, "change_pass.html", {"error": "New password must be at least 6 characters long"})
                 ob.password = make_password(new)
                 ob.save()
                 return redirect("userhome")
@@ -207,6 +209,8 @@ def register(request):
         email = request.POST["email"]
         username = request.POST["username"]
         password = request.POST["password"]
+        if not password or len(password) < 6:
+            return render(request, "register.html", {"error": "Password must be at least 6 characters long"})
         UserTable.objects.create(name=name, place=place, pin=pin, image=image, phone=phone, email=email, username=username, password=make_password(password))
         return redirect("login")
     return render(request, "register.html")

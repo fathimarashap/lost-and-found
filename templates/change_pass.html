@@ -53,13 +53,27 @@
             color: #555;
             font-size: 14px;
         }
-        input {
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .password-wrapper input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 15px;
+            padding-right: 40px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 15px;
+        }
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+            font-size: 16px;
+            user-select: none;
         }
         button {
             width: 100%;
@@ -100,14 +114,29 @@
         <form method="post" action="/changepass/">
             {% csrf_token %}
             <label>Current Password</label>
-            <input type="password" name="current_password">
+            <div class="password-wrapper">
+                <input type="password" name="current_password" id="current_password" placeholder="Current password">
+                <span class="toggle-eye" onclick="togglePassword('current_password')">👁</span>
+            </div>
             <label>New Password</label>
-            <input type="password" name="new_password">
+            <div class="password-wrapper">
+                <input type="password" name="new_password" id="new_password" placeholder="New password">
+                <span class="toggle-eye" onclick="togglePassword('new_password')">👁</span>
+            </div>
             <label>Confirm Password</label>
-            <input type="password" name="confirm_password">
+            <div class="password-wrapper">
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password">
+                <span class="toggle-eye" onclick="togglePassword('confirm_password')">👁</span>
+            </div>
             <button type="submit">Change Password</button>
         </form>
         <p class="error">{{ error }}</p>
     </div>
+    <script>
+        function togglePassword(id) {
+            var input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
 </body>
 </html>

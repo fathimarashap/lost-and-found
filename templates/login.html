@@ -41,6 +41,24 @@
             border-radius: 6px;
             font-size: 15px;
         }
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .password-wrapper input {
+            margin-bottom: 0;
+            padding-right: 40px;
+        }
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            color: #888;
+            user-select: none;
+        }
         button {
             width: 100%;
             padding: 12px;
@@ -77,7 +95,10 @@
         <form method="post" action="/login/">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
+            <div class="password-wrapper">
+                <input type="password" name="password" placeholder="Password" id="password">
+                <span class="toggle-eye" onclick="togglePassword()">👁️</span>
+            </div>
             <button type="submit">Login</button>
         </form>
         <p class="error">{{ error }}</p>
@@ -85,5 +106,11 @@
             <a href="/register/">Don't have an account? Register</a>
         </div>
     </div>
+    <script>
+        function togglePassword(id) {
+            var input = document.getElementById("password");
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>
