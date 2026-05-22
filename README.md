@@ -1,60 +1,101 @@
 # Lost & Found Web Application
 
-A simple and useful web application that helps people report and find lost items. Built with Python Django.
-
-## About
-
-We all lose things in our daily lives — whether it's something valuable or something we're attached to. This app makes it easy to report lost items and connect with people who may have found them.
-
-## How It Works
-
-- Report your lost item with details and an image
-- Other users can see lost items and report if they found it
-- The owner gets notified and can confirm if their item is found
-- Stay connected through the complaint and reply system
+A web application built with Django that helps people report and recover lost items in their community.
 
 ## Features
 
 ### User
-- Register and login
-- Report lost items with image, details and date
-- View lost items reported by others
-- Mark an item as found
-- Confirm if your lost item has been found
-- Update profile
-- Change password
+- Register and login securely
+- View and update profile
+- Report lost items with image and details
+- Browse lost items reported by others
+- Report finding someone's lost item
+- Confirm when your lost item has been found
 - Send complaints and view admin replies
 
 ### Admin
 - View all registered users
-- View all lost items and update status
-- View all found items
+- View all lost items
 - Reply to user complaints
 
 ## Tech Stack
 
-- Python
-- Django
-- SQLite
-- HTML/CSS
+- **Backend:** Python, Django
+- **Database:** PostgreSQL (Railway)
+- **Image Storage:** Cloudinary
+- **Deployment:** Railway
+- **Frontend:** HTML, CSS (mobile responsive)
 
-## Installation
+## Screenshots
 
-1. Clone the repository
-https://github.com/fathimarashap/lost-and-found.git
-2. Install dependencies
-pip install -r requirements.txt
+### User Home
+![User Home](screenshots/userhome.png)
 
-##  Screenshots
+### Manage Lost Items
+![Manage Lost Items](screenshots/mylost.png)
 
-### Home Page
-![Home](screenshots/home.png)
+### Edit Lost Item
+![Edit Lost Item](screenshots/editlost.png)
 
-### Login Page
-![Login](screenshots/login.png)
+### I Found This Item
+![I Found This](screenshots/ifound.png)
 
-### Lost Items Page
-![Lost Items](screenshots/lostitem.png)
+### Confirm Found Item
+![Confirm Found](screenshots/confirm.png)
 
 ### Profile Page
-![Profile](screenshots/profile.png)
+![Profile](screenshots/viewprof.png)
+
+### Send Complaint
+![Send Complaint](screenshots/sendcomp.png)
+
+### Admin Panel
+![Admin Panel](screenshots/admin.png)
+
+## Live Demo
+
+[https://web-production-6fa33.up.railway.app/login/](https://web-production-6fa33.up.railway.app/login/)
+
+## Setup Instructions
+
+### Prerequisites
+- Python 3.x
+- pip
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/fathimarashap/lost-and-found.git
+cd lost-and-found
+```
+
+2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+3. Set environment variables
+```
+SECRET_KEY=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+DATABASE_URL=your_database_url
+```
+
+4. Run migrations
+```bash
+python manage.py migrate
+```
+
+5. Start the server
+```bash
+python manage.py runserver
+```
+
+## Notes
+
+- Passwords are hashed using Django's built-in password hashers
+- Media files are stored on Cloudinary
+- Database is hosted on Railway PostgreSQL
