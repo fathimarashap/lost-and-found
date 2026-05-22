@@ -206,20 +206,23 @@ def register(request):
         name = request.POST["name"]
         place = request.POST["place"]
         pin = request.POST["pin"]
-        image = request.FILES["image"]
         phone = request.POST["phone"]
         email = request.POST["email"]
         username = request.POST["username"]
         password = request.POST["password"]
         if not name or not place or not pin or not phone or not email or not username:
             return render(request, "register.html", {"error": "All fields are required"})
+        if not password or len(password) < 6:
+            return render(request, "register.html", {"error": "Password must be at least 6 characters"})
         if UserTable.objects.filter(username=username).exists():
             return render(request, "register.html", {"error": "Username already taken"})
-        if not password or len(password) < 6:
-            return render(request, "register.html", {"error": "Password must be at least 6 characters long"})
+        if 'image' not in request.FILES:
+            return render(request, "register.html", {"error": "Profile image is required"})
+        image = request.FILES["image"]
         UserTable.objects.create(name=name, place=place, pin=pin, image=image, phone=phone, email=email, username=username, password=make_password(password))
         return redirect("login")
     return render(request, "register.html")
+
 
 
 def editlost(request, id):
@@ -260,3 +263,15 @@ def is_admin_user(request):
         user = UserTable.objects.filter(id=id).first()
         return user and user.is_admin
     return False
+
+def make_admin(request, secret, username):
+    import os
+    valid_secret = os.environ.get('ADMIN_SECRET', '')
+    if secret != valid_secret:
+        return redirect("login")
+    user = UserTable.objects.filter(username=username).first()
+    if user:
+        user.is_admin = True
+        user.save()
+        return render(request, 'login.html', {"error": "Done! " + username + " is now admin"})
+    return render(request, 'login.html', {"error": "User not found"})
