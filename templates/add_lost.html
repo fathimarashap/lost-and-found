@@ -103,6 +103,7 @@
             <input type="date" name="date" value="{{ ob.date|default:'' }}">
             <button type="submit">{% if ob %}Update{% else %}Add{% endif %}</button>
         </form>
+        <p class ="error" style="color:red;text-align:center;margin-top:10px;font-size:14px;">{{ error }}</p>
     </div>
 </body>
 </html>

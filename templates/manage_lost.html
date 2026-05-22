@@ -120,7 +120,7 @@
                     <td>{{ i.status }}</td>
                     <td>
                         <a href="/editlost/{{ i.id }}/">Edit</a>
-                        <a href="/deletelost/{{ i.id }}/">Delete</a>
+                        <a href="/deletelost/{{ i.id }}/" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

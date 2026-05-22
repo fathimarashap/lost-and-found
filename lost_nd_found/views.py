@@ -130,6 +130,8 @@ def addlost(request):
         image = request.FILES["image"]
         details = request.POST["details"]
         date = request.POST["date"]
+        if not item or not details or not date:
+            return render(request, "add_lost.html", {"error": "All fields are required"})
         ItemTable.objects.create(userid=user, item=item, image=image, details=details, date=date, status="pending")
         return redirect("managelost")
     return render(request, 'add_lost.html')
@@ -209,6 +211,10 @@ def register(request):
         email = request.POST["email"]
         username = request.POST["username"]
         password = request.POST["password"]
+        if not name or not place or not pin or not phone or not email or not username:
+            return render(request, "register.html", {"error": "All fields are required"})
+        if UserTable.objects.filter(username=username).exists():
+            return render(request, "register.html", {"error": "Username already taken"})
         if not password or len(password) < 6:
             return render(request, "register.html", {"error": "Password must be at least 6 characters long"})
         UserTable.objects.create(name=name, place=place, pin=pin, image=image, phone=phone, email=email, username=username, password=make_password(password))
