@@ -1,78 +1,141 @@
 <!DOCTYPE html>
-<html lang=“en”>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Lost & Found</title>
     <style>
-    body {
-        background-color: #f0f4f8;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    .form-box {
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        width: 400px;
-        margin: 40px auto;
-    }
-    h2 { color: #1a73e8; text-align: center; margin-bottom: 20px; }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-        color: #555;
-        font-size: 14px;
-    }
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-    }
-    button {
-        width: 100%;
-        padding: 10px;
-        background: #1a73e8;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        nav {
+            background: #1a73e8;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav span {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            margin: 40px auto;
+        }
+        h2 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-image img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #1a73e8;
+        }
+        .profile-image .no-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 13px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        button:hover {
+            background: #1558b0;
+        }
+        @media (max-width: 480px) {
+            .form-box {
+                margin: 20px;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <nav style="background:#1a73e8; padding:12px 30px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="color:white; font-size:18px; font-weight:600;">Lost & Found</span>
+    <nav>
+        <span>Lost & Found</span>
         <div>
-            <a href="/userhome/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
-            <a href="/logout/" style="color:white; text-decoration:none;">Logout</a>
+            <a href="/userhome/">Home</a>
+            <a href="/logout/">Logout</a>
         </div>
     </nav>
     <div class="form-box">
-    <h2>View Profile</h2>
-    <form method="post" action="/viewprofile/" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div style="text-align:center; margin-bottom:20px;">
-            <img src="{{ ob.image.url }}" alt="Profile Image" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid #1a73e8;">
-            <br><br>
-            <input type="file" name="image" style="width:100%; margin-bottom:15px;">
-        </div>
-        <label>Name</label>
-        <input type="text" name="name" value="{{ ob.name }}">
-        <label>Place</label>
-        <input type="text" name="place" value="{{ ob.place }}">
-        <label>Pincode</label>
-        <input type="text" name="pin" value="{{ ob.pin }}">
-        <label>Phone</label>
-        <input type="number" name="phone" value="{{ ob.phone }}">
-        <label>Email</label>
-        <input type="email" name="email" value="{{ ob.email }}">
-        <button type="submit">Update</button>
-    </form>
-</div>
-
+        <h2>My Profile</h2>
+        <form method="post" action="/viewprofile/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="profile-image">
+                {% if ob.image %}
+                <img src="{{ ob.image.url }}" alt="Profile Image">
+                {% else %}
+                <div class="no-image">No image</div>
+                {% endif %}
+                <br><br>
+                <input type="file" name="image" accept="image/*">
+            </div>
+            <label>Name</label>
+            <input type="text" name="name" value="{{ ob.name }}">
+            <label>Place</label>
+            <input type="text" name="place" value="{{ ob.place }}">
+            <label>Pincode</label>
+            <input type="text" name="pin" value="{{ ob.pin }}">
+            <label>Phone</label>
+            <input type="number" name="phone" value="{{ ob.phone }}">
+            <label>Email</label>
+            <input type="email" name="email" value="{{ ob.email }}">
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
 </body>
 </html>

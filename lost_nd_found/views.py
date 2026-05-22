@@ -1,14 +1,15 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import UserTable, ItemTable, Complaints, Found
-
+from django.contrib.auth.hashers import make_password, check_password
 
 def userlogin(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-        user = UserTable.objects.filter(username=username, password=password).first()
-        if user:
+        user = UserTable.objects.filter(username=username).first()
+        if user and check_password(password, user.password):
+            user = None
             request.session["user_id"] = user.id
             if user.is_admin:
                 return redirect("adminhome")
@@ -48,7 +49,8 @@ def viewitems(request):
 def viewfound(request):
     if not is_logged_in(request):
         return redirect("login")
-    return render(request, 'view_found.html')
+    data = Found.objects.all()
+    return render(request, 'view_found.html', {"data": data})
 
 
 def viewcomplaint(request):
@@ -96,9 +98,9 @@ def changepass(request):
         current = request.POST["current_password"]
         new = request.POST["new_password"]
         confirm = request.POST["confirm_password"]
-        if ob.password == current:
+        if check_password(current, ob.password):
             if new == confirm:
-                ob.password = new
+                ob.password = make_password(new)
                 ob.save()
                 return redirect("userhome")
             else:
@@ -189,8 +191,8 @@ def sendcomplaint(request):
         id = request.session.get("user_id")
         user = UserTable.objects.get(id=id)
         complaint = request.POST["complaint"]
-        date = request.POST["date"]
-        Complaints.objects.create(userid=user, complaint=complaint, date=date)
+        from datetime import date
+        Complaints.objects.create(userid=user, complaint=complaint, date=date.today())
         return redirect("viewreply")
     return render(request, 'send_complain.html')
 
@@ -205,7 +207,7 @@ def register(request):
         email = request.POST["email"]
         username = request.POST["username"]
         password = request.POST["password"]
-        UserTable.objects.create(name=name, place=place, pin=pin, image=image, phone=phone, email=email, username=username, password=password)
+        UserTable.objects.create(name=name, place=place, pin=pin, image=image, phone=phone, email=email, username=username, password=make_password(password))
         return redirect("login")
     return render(request, "register.html")
 
