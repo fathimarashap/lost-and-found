@@ -270,8 +270,4 @@ def make_admin(request, secret, username):
     if secret != valid_secret:
         return redirect("login")
     user = UserTable.objects.filter(username=username).first()
-    if user:
-        user.is_admin = True
-        user.save()
-        return render(request, 'login.html', {"error": "Done! " + username + " is now admin"})
-    return render(request, 'login.html', {"error": "User not found"})
+    

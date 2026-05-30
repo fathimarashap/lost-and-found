@@ -23,7 +23,6 @@ urlpatterns = [
     path('deletelost/<int:id>/', views.deletelost, name='deletelost'),
     path('logout/', views.userlogout, name='logout'),
     path('view_my_found/', views.view_my_found, name='view_my_found'),
-    path('confirm_found/<int:id>/', views.confirm_found, name='confirm_found'),
-    path('makeadmin/<str:secret>/<str:username>/', views.make_admin, name='make_admin'),
+    path('confirmusername_found/<int:id>/', views.confirm_found, name='confirm_found'),
 
 ]
