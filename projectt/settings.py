@@ -79,6 +79,6 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-6fa33.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://lost-and-found-website.onrender.com']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
